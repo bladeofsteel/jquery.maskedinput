@@ -17,6 +17,7 @@
 		definitions: {
 			'9': "[0-9]",
 			'a': "[A-Za-z]",
+			'A': "[A-Z]",
 			'*': "[A-Za-z0-9]"
 		},
 		dataName:"rawMaskFn"
