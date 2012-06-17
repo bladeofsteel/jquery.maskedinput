@@ -8,3 +8,16 @@ This is a masked input plugin for the jQuery javascript library. It allows a use
 * a - Represents an alpha character (A-Z,a-z)
 * 9 - Represents a numeric character (0-9)
 * \* - Represents an alphanumeric character (A-Z,a-z,0-9)
+
+autoMask (jQuery 1.7+)
+--------
+By calling $(selector).automask() once it reads the data-mask attribute and automatically set the specified mask to any input:text element inside the selector.  
+Example:
+<pre>
+$(function() {
+	$(document).automask();
+});
+
+<!-- The mask will be 99/99/9999 -->
+<input type="text" data-mask="99/99/9999" />
+</pre>

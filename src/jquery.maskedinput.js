@@ -278,13 +278,13 @@
 			});
 		},
 		
-		//jQuery 1.7+
 		autoMask: function() {
 			return $(this).on("focus", "input:text[data-mask]", function(e) {
-				var $this = $(this);
-				var mask = $this.data("mask");
-				if(mask !== undefined && $this.mask() === undefined) {
-					$this.mask(mask);
+				var $input = $(this),
+					dataMask = $input.data("mask");
+				
+				if( dataMask !== undefined && $input.mask() === undefined ) {
+					$input.mask(dataMask);
 				}
 			});
 		}
