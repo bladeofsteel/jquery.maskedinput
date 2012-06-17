@@ -18,6 +18,6 @@ $(function() {
 	$(document).automask();
 });
 
-<!-- The mask will be 99/99/9999 -->
+//The mask will be 99/99/9999
 &lt;input type="text" data-mask="99/99/9999" /&gt;
 </pre>
