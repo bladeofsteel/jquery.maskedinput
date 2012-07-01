@@ -15,7 +15,7 @@ By calling $(selector).automask() once it reads the data-mask attribute and auto
 Example:
 <pre>
 $(function() {
-	$(document).automask();
+	$(document).autoMask();
 });
 
 //The mask will be 99/99/9999
