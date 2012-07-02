@@ -27,6 +27,7 @@
 		//Helper Function for Caret positioning
 		caret: function(begin, end) {
 			if (this.length == 0) return;
+			if (this.is(":hidden")) return; //setSelectionRange fails if the element is hidden
 			if (typeof begin == 'number') {
 				end = (typeof end == 'number') ? end : begin;
 				return this.each(function() {

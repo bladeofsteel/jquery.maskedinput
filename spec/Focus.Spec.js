@@ -16,7 +16,17 @@ feature("Focusing A Masked Input",function(){
 			expect(caret.end).toEqual(0);
 		});
 	});
-
+	
+	//Could not test this properly since jquery uses $.error() to throw this exception
+	scenario("Error: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIDOMHTMLInputElement.setSelectionRange]",function(){
+		given("a mask in a hidden input",function(){
+			input.hide().mask("9");
+		});
+		when("focusing no error should occur in the console",function(){
+			input.focus();
+		});
+	});
+	
 	scenario("Mask starts with a literal",function(){
 		given("a mask beginning with a literal",function(){
 			input.mask("(9)");
