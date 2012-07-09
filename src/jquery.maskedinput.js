@@ -286,7 +286,7 @@
 					dataMask = $input.data("mask");
 				
 				if( dataMask !== undefined && $input.mask() === undefined ) {
-					$input.mask(dataMask);
+					$input.mask( String(dataMask) );
 				}
 			});
 		}
