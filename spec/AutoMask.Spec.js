@@ -75,6 +75,32 @@
 			
 		});
 		
+		scenario("The callback options from autoMask should behave exactly as the regular mask", function() {
+			var input1, input2,
+				$cont = $("#auto-mask-container"),
+				$input = $cont.find("input");
+			
+			given("an autoMask with callbacks", function() {
+				$cont.autoMask({
+					completed: function() {
+						input1 = this;
+					},
+					afterBlur: function() {
+						input2 = this;
+					}
+				});
+			});
+			
+			when("typing and bluring", function() {
+				$input.focus().mashKeys("12").blur();
+			});
+			
+			then("this should be correct", function() {
+				expect(input1[0]).toBe($input[0]);
+				expect(input2[0]).toBe($input[0]);
+			});
+		})
+		
 		afterEach(function() {
 			container1.remove();
 			container2.remove();
