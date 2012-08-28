@@ -21,3 +21,17 @@ $(function() {
 //The mask will be 99/99/9999
 &lt;input type="text" data-mask="99/99/9999" /&gt;
 </pre>
+
+You could also pass the options in the first argument. These options will be defined once and be valid to all the masks inside the selector.
+Example:
+<pre>
+$(function() {
+	$(document).autoMask({
+		completed: function() {
+			alert("Alert executed after each mask has been completed");
+		}
+	});
+});
+</pre>
+
+autoMask does NOT support two or more instance in the same selector or in any of it's contents.

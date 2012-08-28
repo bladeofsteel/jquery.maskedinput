@@ -280,13 +280,13 @@
 			});
 		},
 		
-		autoMask: function() {
+		autoMask: function( options ) {
 			return $(this).on("focus", "input:text[data-mask]", function(e) {
 				var $input = $(this),
 					dataMask = $input.data("mask");
 				
 				if( dataMask !== undefined && $input.mask() === undefined ) {
-					$input.mask( String(dataMask) );
+					$input.mask( String(dataMask), options );
 				}
 			});
 		}
