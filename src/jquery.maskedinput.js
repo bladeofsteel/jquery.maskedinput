@@ -282,19 +282,8 @@
 		
 		autoMask: function( options ) {
 			return $(this).on("focus", "input:text[data-mask]", function(e) {
-				var completed, afterBlur,
-					$input = $(this),
+				var $input = $(this),
 					dataMask = $input.data("mask");
-				
-				if( options ) {
-					(completed = options.completed) && (options.completed = function() {
-						completed.call( $input );
-					});
-					
-					(afterBlur = options.afterBlur) && (options.afterBlur = function() {
-						afterBlur.call( $input );
-					});
-				}
 				
 				if( dataMask !== undefined && $input.mask() === undefined ) {
 					$input.mask( String(dataMask), options );
