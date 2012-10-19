@@ -299,7 +299,8 @@
 			}
 			
 			$context.find( selector ).each( maskIt );
-			return $context.on("focus", selector, maskIt);
+			$context.off("focus.automask");
+			return $context.on("focus.automask", selector, maskIt);
 		}
 	});
 })(jQuery);

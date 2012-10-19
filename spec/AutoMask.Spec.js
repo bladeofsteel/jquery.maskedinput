@@ -3,7 +3,7 @@
 	var container, //one with mask and one without
 		container2, //one with mask
 		container3, //one with mask and value
-		oldJqueryOn, oldMask;
+		oldJqueryOn, oldJQueryOff, oldMask;
 	
 	feature("AutoMask", function() {
 		beforeEach(function() {
@@ -11,6 +11,7 @@
 			container2 = $("<div id='auto-mask-container2'><input type='text' data-mask='99' /></div>").appendTo( document.body );
 			container3 = $("<div id='auto-mask-container3'><input type='text' data-mask='9/9' value='99' /></div>").appendTo( document.body );
 			oldJqueryOn = $.fn.on;
+			oldJQueryOff = $.fn.off;
 			oldMask = $.fn.mask;
 		});
 		
@@ -140,6 +141,40 @@
 			
 		});
 		
+		scenario("autoMask being called twice", function() {
+			
+			var $cont = $("#auto-mask-container3");
+			var countOn = 0;
+			var countOff = 0;
+			
+			$.fn.on = function( eventType, selector ) {
+				if ( eventType === "focus.automask" ) {
+					countOn++;
+				}
+			};
+			
+			$.fn.off = function( eventType, selector ) {
+				if ( eventType === "focus.automask" ) {
+					countOff++;
+				}
+			};
+			
+			$.fn.mask = function() {};
+			
+			when("calling autoMask", function() {
+				$cont.autoMask();
+			});
+			
+			then("on should be called once", function() {
+				expect( countOn++ ).toBe( 1 );
+			});
+			
+			then("off should be called once", function() {
+				expect( countOff++ ).toBe( 1 );
+			});
+			
+		});
+		
 		afterEach(function() {
 			container1.remove();
 			container2.remove();
@@ -148,6 +183,7 @@
 			container1 = container2 = container3 = undefined;
 			
 			$.fn.on = oldJqueryOn;
+			$.fn.off = oldJQueryOff;
 			$.fn.mask = oldMask;
 		});
 	});
