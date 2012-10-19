@@ -281,7 +281,12 @@
 		},
 		
 		autoMask: function( options ) {
-			return $(this).on("focus", "input:text[data-mask]", function(e) {
+			
+			function selector( type ) {
+				return "input[type='" + type + "'][data-mask]";
+			}
+			
+			return $(this).on("focus", [ selector("text"), selector("tel"), selector("number") ].join(", "), function(e) {
 				var $input = $(this),
 					dataMask = $input.data("mask");
 				

@@ -11,22 +11,28 @@ This is a masked input plugin for the jQuery javascript library. It allows a use
 
 autoMask (jQuery 1.7+)
 --------
-By calling $(selector).autoMask() once it reads the data-mask attribute and automatically set the specified mask to any input:text element inside the selector.  
+By calling $( selector ).autoMask() once it reads the data-mask attribute and automatically set the specified mask to any input[type='text'], input[type='tel'] or input[type='number'] element inside the selector.  
 Example:
 <pre>
 $(function() {
-	$(document).autoMask();
+	$( document ).autoMask();
 });
 
 //The mask will be 99/99/9999
 &lt;input type="text" data-mask="99/99/9999" /&gt;
+
+//The mask will be +99 9999
+&lt;input type="tel" data-mask="+99 9999" /&gt;
+
+//The mask will be 99 - 99
+&lt;input type="number" data-mask="99 - 99" /&gt;
 </pre>
 
 You could also pass the options in the first argument. These options will be defined once and be valid to all the masks inside the selector.
 Example:
 <pre>
 $(function() {
-	$(document).autoMask({
+	$( document ).autoMask({
 		completed: function() {
 			alert("Alert executed after each mask has been completed");
 		}
