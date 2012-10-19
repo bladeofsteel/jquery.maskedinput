@@ -282,18 +282,24 @@
 		
 		autoMask: function( options ) {
 			
-			function selector( type ) {
+			var selector = [ getSelector("text"), getSelector("tel"), getSelector("number") ].join(", ");
+			var $context = $( this );
+			
+			function getSelector( type ) {
 				return "input[type='" + type + "'][data-mask]";
 			}
 			
-			return $(this).on("focus", [ selector("text"), selector("tel"), selector("number") ].join(", "), function(e) {
+			function maskIt() {
 				var $input = $(this),
 					dataMask = $input.data("mask");
 				
 				if( dataMask !== undefined && $input.mask() === undefined ) {
 					$input.mask( String(dataMask), options );
 				}
-			});
+			}
+			
+			$context.find( selector ).each( maskIt );
+			return $context.on("focus", selector, maskIt);
 		}
 	});
 })(jQuery);

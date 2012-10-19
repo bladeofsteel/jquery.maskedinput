@@ -1,10 +1,17 @@
 (function( $ ) {
-	var container, container2, oldJqueryOn;
+	
+	var container, //one with mask and one without
+		container2, //one with mask
+		container3, //one with mask and value
+		oldJqueryOn, oldMask;
+	
 	feature("AutoMask", function() {
 		beforeEach(function() {
-			container1 = $("<div id='auto-mask-container'><input type='text' data-mask='9/9' /></div><div id='no-auto-mask'><input type='text' data-mask='9/9' /></div>").appendTo("body");
-			container2 = $("<div id='auto-mask-container2'><input type='text' data-mask='99' /></div>").appendTo("body");
+			container1 = $("<div id='auto-mask-container'><input type='text' data-mask='9/9' /></div><div id='no-auto-mask'><input type='text' data-mask='9/9' /></div>").appendTo( document.body );
+			container2 = $("<div id='auto-mask-container2'><input type='text' data-mask='99' /></div>").appendTo( document.body );
+			container3 = $("<div id='auto-mask-container3'><input type='text' data-mask='9/9' value='99' /></div>").appendTo( document.body );
 			oldJqueryOn = $.fn.on;
+			oldMask = $.fn.mask;
 		});
 		
 		scenario("Valid container", function() {
@@ -110,8 +117,25 @@
 				});
 			};
 			
+			$.fn.mask = function() {};
+			
 			when("calling an autoMask", function() {
 				$("#auto-mask-container").autoMask();
+			});
+			
+		});
+		
+		scenario("If an input exists", function() {
+			
+			var $cont = $("#auto-mask-container3");
+			var $input = $cont.find("input");
+			
+			when("calling an autoMask", function() {
+				$cont.autoMask();
+			});
+			
+			then("any input with value and data-mask should be masked", function() {
+				expect( $input.val() ).toBe("9/9");
 			});
 			
 		});
@@ -119,10 +143,12 @@
 		afterEach(function() {
 			container1.remove();
 			container2.remove();
-			container1 = undefined;
-			container2.remove();
+			container3.remove();
+			
+			container1 = container2 = container3 = undefined;
 			
 			$.fn.on = oldJqueryOn;
+			$.fn.mask = oldMask;
 		});
 	});
 })( jQuery );

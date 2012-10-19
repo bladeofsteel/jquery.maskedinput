@@ -12,6 +12,7 @@ This is a masked input plugin for the jQuery javascript library. It allows a use
 autoMask (jQuery 1.7+)
 --------
 By calling $( selector ).autoMask() once it reads the data-mask attribute and automatically set the specified mask to any input[type='text'], input[type='tel'] or input[type='number'] element inside the selector.  
+By adding new elements with a data-mask attribute and without value autoMask will bind the mask behavior to that element.
 Example:
 <pre>
 $(function() {
